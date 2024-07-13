@@ -229,3 +229,41 @@ func (t *ExampleSchema_Item) FromExternalRef0NewPet(v externalRef0.NewPet) error
 
 //go:embed test_spec.yaml
 var testOpenAPIDefinition string
+
+func TestAllOfWithAdditionalProperties(t *testing.T) {
+	if testing.Short() {
+		t.Skip("Skipping test that interacts with the network")
+	}
+
+	packageName := "api"
+	opts := Configuration{
+		PackageName: packageName,
+		Generate: GenerateOptions{
+			Models: true,
+		},
+	}
+	spec := "test_specs/allof-additional-properties.yaml"
+	swagger, err := util.LoadSwagger(spec)
+	require.NoError(t, err)
+
+	// Run our code generation:
+	code, err := Generate(swagger, opts)
+	assert.NoError(t, err)
+	assert.NotEmpty(t, code)
+
+	// Check that we have valid (formattable) code:
+	_, err = format.Source([]byte(code))
+	assert.NoError(t, err)
+
+	// Check that we have a package:
+	assert.Contains(t, code, "package api")
+
+	// Check generated oneOf structure:
+	assert.Contains(t, code, `
+// ExampleSchemaWithAdditionalProperties defines model for exampleSchemaWithAdditionalProperties.
+type ExampleSchemaWithAdditionalProperties struct {
+	AdditionalProperty string `+"`json:\"additionalProperty\"`"+`
+	BaseProperty       string `+"`json:\"baseProperty\"`"+`
+}
+`)
+}
