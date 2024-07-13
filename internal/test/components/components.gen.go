@@ -46,22 +46,6 @@ const (
 	Enum5N7 Enum5 = 7
 )
 
-// Defines values for EnumUnion.
-const (
-	EnumUnionFour  EnumUnion = "Four"
-	EnumUnionOne   EnumUnion = "One"
-	EnumUnionThree EnumUnion = "Three"
-	EnumUnionTwo   EnumUnion = "Two"
-)
-
-// Defines values for EnumUnion2.
-const (
-	EnumUnion2One   EnumUnion2 = "One"
-	EnumUnion2Seven EnumUnion2 = "Seven"
-	EnumUnion2Three EnumUnion2 = "Three"
-	EnumUnion2Two   EnumUnion2 = "Two"
-)
-
 // Defines values for FunnyValues.
 const (
 	FunnyValuesAnd      FunnyValues = "&"
@@ -158,10 +142,10 @@ type Enum4 string
 type Enum5 int
 
 // EnumUnion defines model for EnumUnion.
-type EnumUnion string
+type EnumUnion = interface{}
 
 // EnumUnion2 defines model for EnumUnion2.
-type EnumUnion2 string
+type EnumUnion2 = interface{}
 
 // FunnyValues Edge cases for enum names
 type FunnyValues string

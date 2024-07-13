@@ -27,22 +27,16 @@ const (
 	TestFieldA1Foo TestFieldA1 = "foo"
 )
 
-// Defines values for TestFieldB.
-const (
-	TestFieldBBar TestFieldB = "bar"
-	TestFieldBFoo TestFieldB = "foo"
-)
-
 // Defines values for TestFieldC1.
 const (
-	Bar TestFieldC1 = "bar"
-	Foo TestFieldC1 = "foo"
+	TestFieldC1Bar TestFieldC1 = "bar"
+	TestFieldC1Foo TestFieldC1 = "foo"
 )
 
 // Test defines model for test.
 type Test struct {
 	FieldA *Test_FieldA `json:"fieldA,omitempty"`
-	FieldB *TestFieldB  `json:"fieldB,omitempty"`
+	FieldB *interface{} `json:"fieldB,omitempty"`
 	FieldC *Test_FieldC `json:"fieldC,omitempty"`
 }
 
@@ -56,9 +50,6 @@ type TestFieldA1 string
 type Test_FieldA struct {
 	union json.RawMessage
 }
-
-// TestFieldB defines model for Test.FieldB.
-type TestFieldB string
 
 // TestFieldC0 defines model for .
 type TestFieldC0 = string
